@@ -1,0 +1,299 @@
+/* styles/style.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background: #f8f9fa;
+    color: #333;
+}
+
+.navbar {
+    background: #ff4d4d;
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffd700;
+}
+
+.home-header {
+    background: linear-gradient(to right, #ff4d4d, #ff7373);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 60vh;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: auto;
+}
+
+.header-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.highlight {
+    color: #ffd700;
+}
+
+.explore-btn {
+    background: #ffd700;
+    color: #ff4d4d;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+}
+
+.explore-btn:hover {
+    background: #ffeb3b;
+}
+
+.recommendations {
+    padding: 50px 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.recommendations h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #ff4d4d;
+}
+
+.recommendation-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.recommendation-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(33.33% - 20px);
+    max-width: 350px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px);
+}
+
+.recommendation-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.recommendation-card h3 {
+    margin: 15px;
+    font-size: 1.4em;
+    color: #ff4d4d;
+    text-align: center;
+}
+
+.recommendation-card p {
+    margin: 0 15px 10px;
+    font-size: 0.9em;
+    line-height: 1.6em;
+    text-align: center;
+}
+
+.rating, .location {
+    font-weight: bold;
+}
+
+.view-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 15px;
+    transition: background 0.3s ease;
+}
+
+.view-btn:hover {
+    background: #ff7373;
+}
+
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+@media (max-width: 768px) {
+    .recommendation-card {
+        width: calc(50% - 20px);
+    }
+
+    .header-content h1 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .recommendation-card {
+        width: 100%;
+    }
+
+    .header-content h1 {
+        font-size: 1.5em;
+    }
+
+    .explore-btn {
+        padding: 10px 15px;
+    }
+}
+.about-section {
+    padding: 50px 20px;
+    background: #fff;
+    color: #333;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.6em;
+}
+
+.about-section h2 {
+    font-size: 2.2em;
+    color: #ff4d4d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-section h3 {
+    font-size: 1.6em;
+    margin-top: 30px;
+    color: #333;
+}
+
+.about-section h4 {
+    font-size: 1.4em;
+    margin-top: 20px;
+    color: #555;
+}
+
+.about-section p, .about-section ul {
+    margin: 15px 0;
+}
+
+.about-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.about-section ul li {
+    margin-bottom: 10px;
+}
+/* styles/style.css */
+
+/* ... (estilos anteriores) ... */
+
+.contact-section {
+    padding: 50px 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2em;
+    color: #ff4d4d;
+    margin-bottom: 30px;
+}
+
+.contact-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.contact-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-card h3 {
+    margin: 10px 0;
+    font-size: 1.4em;
+    color: #ff4d4d;
+}
+
+.contact-card p {
+    margin: 10px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+.contact-card a {
+    display: inline-block;
+    color: #ff4d4d;
+    margin: 5px 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-card a:hover {
+    color: #ff7373;
+}
+.contact-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
