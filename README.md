@@ -68,11 +68,11 @@ El proyecto se completará en un plazo de 6 semanas, dividido en 3 sprints de 2 
 
 | <img src="images/jonathan.jpg" alt="Foto de Jonathan Gutiérrez" style="width: 100px; height: 100px; border-radius: 50%;"> | <img src="images/lautaro.jpg" alt="Foto de Lautaro Vergara" style="width: 100px; height: 100px; border-radius: 50%;"> |
 |-----------------------------------------------------|--------------------------------------------------|
-| **Jonathan Gutiérrez** <br> *Frontend Developer* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/jgutierrezladino) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:yogulanacio@gmail.com) | **Lautaro Vergara** <br> *Data Scientist* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/LautaroVergaraAmodeo97) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:) |
+| **Jonathan Gutiérrez** <br> *Data Engineer* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/jgutierrezladino) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:yogulanacio@gmail.com) | **Lautaro Vergara** <br> *Data Scientist* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/LautaroVergaraAmodeo97) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:) |
 
 | <img src="images/augusto.jpg" alt="Foto de Augusto Vetta" style="width: 100px; height: 100px; border-radius: 50%;"> | <img src="images/antonio.jpg" alt="Foto de Antonio" style="width: 100px; height: 100px; border-radius: 50%;"> |
 |------------------------------------------------|-------------------------------------------------|
-| **Augusto Vetta** <br> *Data Analyst* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/AugVe) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:) | **Antonio** <br> *Data Analyst* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/Antojose93) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:antonio.hurtado1993@gmail.com)  |
+| **Augusto Vetta** <br> *Data Analyst* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/AugVe) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:) | **Antonio Hurtado** <br> *Data Engineer* <br> [<img src="images/logos/github-logo.png" alt="GitHub" style="width: 60px; height: 20px;">](https://github.com/Antojose93) [<img src="images/logos/email-icon.png" alt="Email" style="width: 40px; height: 20px;">](mailto:antonio.hurtado1993@gmail.com)  |
 
 
 
@@ -80,10 +80,10 @@ El proyecto se completará en un plazo de 6 semanas, dividido en 3 sprints de 2 
 
 ## **Stack Tecnológico**
 
-- **Backend**: Python, TensorFlow, Flask/FastAPI
-- **Cloud Services**: Google Cloud Platform (Cloud SQL, Firestore)
-- **Frontend**: HTML, CSS, JavaScript (React)
-- **Análisis de Datos**: Pandas, Looker Studio, BigQuery
+- **Backend**: Python, Apache AirFlow, Flask/FastAPI
+- **Cloud Services**: LocalHost
+- **Frontend**: Streamlit 
+- **Análisis de Datos**: Pandas, PowerBI
 
 ---
 
