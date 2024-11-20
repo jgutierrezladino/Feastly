@@ -1,0 +1,21 @@
+# Ignorar archivos y carpetas temporales
+logs/
+datasets/
+
+# Ignorar configuración personal de Airflow (pero rastrear DAGs)
+airflow/
+!airflow/dags/
+
+# Docker y entornos virtuales
+*.env
+*.log
+__pycache__/
+*.pyc
+*.pyo
+
+# Node.js (si aplica)
+node_modules/
+
+# Excluir configuraciones temporales pero rastrear archivos importantes
+!.gitignore
+docker-compose.override.yml

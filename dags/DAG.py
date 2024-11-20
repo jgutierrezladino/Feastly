@@ -1,102 +1,88 @@
-from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
-from airflow.providers.google.cloud.operators.gcs import GCSUploadFileOperator
-from airflow.decorators import task
+from datetime import datetime
 import pandas as pd
-import logging
 from google.cloud import storage
 
-# Configuración del DAG
-TAGS = ['ETL']
-DAG_ID = 'ETL_DAG'
-DAG_DESCRIPTION = 'Un DAG para realizar ETL de archivos parquet'
-DAG_SCHEDULE = '@daily'  # Puedes ajustar esto según necesites
-default_args = {
-    'start_date': datetime(2024, 11, 1),
-    'retries': 1,  # Ajusta esto según lo que necesites
-    'retry_delay': timedelta(minutes=5)
-}
+# Función para descargar y leer archivos desde GCS
+def extract_data(bucket_name, file_path, **kwargs):
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(file_path)
 
-# Mi código de funciones ETL
+    with open("/tmp/temp.parquet", "wb") as temp_file:
+        blob.download_to_file(temp_file)
+    
+    df = pd.read_parquet("/tmp/temp.parquet")
+    return df.to_dict()  # Convertimos a dict para pasarlo por XCom
 
-def extract():
-    logging.info("Iniciando tarea de extracción.")
-    try:
-        # Cambiar la ruta a un archivo en GCS
-        client = storage.Client.from_service_account_json("/opt/airflow/gcp/credentials/hazel-framing-413123-cf4127d45f7e.json")
-        bucket = client.get_bucket('your-gcs-bucket-name')  # Reemplaza con tu bucket de GCS
-        blob = bucket.blob('datasets/bussiness.parquet')  # Ruta en GCS
-        blob.download_to_filename('/opt/airflow/dags/datasets/bussiness.parquet')
+# Función para transformar los datos
+def transform_data(**kwargs):
+    ti = kwargs['ti']
+    df_dict = ti.xcom_pull(task_ids='extract_data')  # Recuperar datos de XCom
+    df = pd.DataFrame(df_dict)
 
-        df = pd.read_parquet('/opt/airflow/dags/datasets/bussiness.parquet')
-        logging.info("Datos cargados en extract:\n%s", df.head())
-    except Exception as e:
-        logging.error("Error en la tarea de extracción: %s", str(e))
-        raise
-    return df
+    df = df.drop(columns=['categories'])
+    df = df.explode('category')
+    return df.to_dict()
 
+# Función para cargar los datos a GCS
+def load_data(bucket_name, destination_path, **kwargs):
+    ti = kwargs['ti']
+    df_dict = ti.xcom_pull(task_ids='transform_data')  # Recuperar datos de XCom
+    df = pd.DataFrame(df_dict)
 
-def transform(df):
-    logging.info("Iniciando tarea de transformación.")
-    try:
-        df_transformed = df[df['state'] == 'MA']  # Solo un ejemplo
-        logging.info("Datos después de la transformación:\n%s", df_transformed.head())
-    except Exception as e:
-        logging.error("Error en la tarea de transformación: %s", str(e))
-        raise
-    return df_transformed
+    df.to_csv("/tmp/transformed_data.csv", index=False)
 
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_path)
 
-def load(df):
-    logging.info("Iniciando tarea de carga.")
-    try:
-        logging.info("Primeras filas de los datos a cargar:\n%s", df.head())
-        logging.info("Número de filas: %d", len(df))  # Verifica que no esté vacío
-        output_file = '/opt/airflow/dags/datasets/salida.parquet'
-        df.to_parquet(output_file)
-        
-        # Subir el archivo transformado a GCS
-        client = storage.Client.from_service_account_json("/opt/airflow/gcp/credentials/hazel-framing-413123-cf4127d45f7e.json")
-        bucket = client.get_bucket('your-gcs-bucket-name')  # Reemplaza con tu bucket de GCS
-        blob = bucket.blob('datasets/salida.parquet')  # Ruta en GCS
-        blob.upload_from_filename(output_file)
-
-        logging.info("Datos cargados correctamente en GCS en salida.parquet.")
-    except Exception as e:
-        logging.error("Error en la tarea de carga: %s", str(e))
-        raise
-
+    with open("/tmp/transformed_data.csv", "rb") as temp_file:
+        blob.upload_from_file(temp_file)
 
 # Definición del DAG
-dag = DAG(
-    dag_id=DAG_ID,
-    description=DAG_DESCRIPTION,
-    catchup=False,
-    schedule_interval=DAG_SCHEDULE,
-    max_active_runs=1,
-    dagrun_timeout=timedelta(seconds=200000),
-    default_args=default_args,
-    tags=TAGS
-)
+with DAG(
+    'etl_parquet',
+    default_args={
+        'owner': 'airflow',
+        'depends_on_past': False,
+        'start_date': datetime(2023, 1, 1),
+        'email': ['your_email@example.com'],
+        'email_on_failure': True,
+        'email_on_retry': True,
+    },
+    schedule_interval="@daily",
+    catchup=False
+) as dag:
 
-with dag as dag:
-    extract_task = PythonOperator(
-        task_id='extract',
-        python_callable=extract,
+    # Tarea para extraer los datos
+    extract = PythonOperator(
+        task_id='extract_data',
+        python_callable=extract_data,
+        op_kwargs={
+            'bucket_name': 'us-central1-prueba-3b82ddb6-bucket',
+            'file_path': 'data/business-metadatos-inner.parquet',
+        },
     )
 
-    transform_task = PythonOperator(
-        task_id='transform',
-        python_callable=transform,
-        op_kwargs={'df': "{{ task_instance.xcom_pull(task_ids='extract') }}"},  # Se pasan los datos desde 'extract'
+    # Tarea para transformar los datos
+    transform = PythonOperator(
+        task_id='transform_data',
+        python_callable=transform_data,
+        provide_context=True,
     )
 
-    load_task = PythonOperator(
-        task_id='load',
-        python_callable=load,
-        op_kwargs={'df': '{{ task_instance.xcom_pull(task_ids="transform") }}'},  # Se pasan los datos desde 'transform'
+    # Tarea para cargar los datos
+    load = PythonOperator(
+        task_id='load_data',
+        python_callable=load_data,
+        op_kwargs={
+            'bucket_name': 'us-central1-prueba-3b82ddb6-bucket',
+            'destination_path': 'output/transformed_data.csv',
+        },
+        provide_context=True,
     )
 
-    extract_task >> transform_task >> load_task
+    # Dependencias entre las tareas
+    extract >> transform >> load

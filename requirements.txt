@@ -1,7 +1,5 @@
-apache-airflow==2.9.0
-apache-airflow-providers-google
-google-cloud-storage
-apache-airflow-providers-postgres
-apache-airflow-providers-celery
-psycopg2
 pandas
+google-cloud-storage
+functions-framework==3.*
+pyarrow
+google-cloud-bigquery==3.10.0
