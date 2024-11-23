@@ -52,6 +52,12 @@ Desarrollar una plataforma web que realice recomendaciones de restaurantes media
 
 ---
 
+## **Demos Sprints:**
+- **Sprint 1**: https://prezi.com/view/rtvRhnEI11fgLjD8Z37x/
+- **Sprint 2**: https://prezi.com/view/C2AhjmCJ8fwRBSLzcg0H/
+- **Sprint 3**: https://feastlyproject.streamlit.app/#recomendaciones-section
+
+
 ## **Alcance del Proyecto**
 
 El proyecto de **Feastly** comenzará con una base de datos centrada en los Estados Unidos, abarcando los 51 estados. El enfoque inicial se pondrá en optimizar el tiempo de respuesta de las recomendaciones y en maximizar el valor de la analítica para asegurar que los usuarios elijan restaurantes con confianza. 
