@@ -37,21 +37,6 @@ Desarrollar una plataforma web que realice recomendaciones de restaurantes media
 
 ---
 
-## **KPI's de la Plataforma**
-
-- **Tiempo de respuesta**: Medir el tiempo promedio para generar recomendaciones (objetivo: < 30 segundos).
-- **Precisión del modelo**: Evaluar la precisión de las recomendaciones a través de métricas como RMSE y Precision@K.
-- **Satisfacción del usuario**: Evaluar la tasa de aceptación de recomendaciones basadas en las interacciones del usuario.
-
-## **KPI's de Usuario**
-
-- **Porcentaje de coincidencia**: Grado de coincidencia entre las preferencias del usuario y las características del restaurante recomendado.
-- **Proximidad**: Distancia promedio entre la ubicación del usuario y los restaurantes recomendados.
-- **Opiniones positivas**: Proporción de reseñas positivas de un restaurante en relación con las amenidades preferidas por el usuario.
-- **Popularidad**: Tasa de visitas a los restaurantes recomendados en función de la época del año.
-
----
-
 ## **Demos Sprints:**
 - **Sprint 1**: https://prezi.com/view/rtvRhnEI11fgLjD8Z37x/
 - **Sprint 2**: https://prezi.com/view/C2AhjmCJ8fwRBSLzcg0H/
